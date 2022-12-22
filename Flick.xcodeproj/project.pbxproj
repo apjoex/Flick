@@ -11,6 +11,8 @@
 		AC6B399929549EC900440CB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399829549EC900440CB0 /* ContentView.swift */; };
 		AC6B399B29549ECA00440CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC6B399A29549ECA00440CB0 /* Assets.xcassets */; };
 		AC6B399E29549ECA00440CB0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC6B399D29549ECA00440CB0 /* Preview Assets.xcassets */; };
+		AC6B39A52954C37400440CB0 /* FlickRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B39A42954C37400440CB0 /* FlickRow.swift */; };
+		AC6B39A72954C38A00440CB0 /* Flick.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B39A62954C38A00440CB0 /* Flick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		AC6B399829549EC900440CB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AC6B399A29549ECA00440CB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC6B399D29549ECA00440CB0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AC6B39A42954C37400440CB0 /* FlickRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickRow.swift; sourceTree = "<group>"; };
+		AC6B39A62954C38A00440CB0 /* Flick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +56,10 @@
 			isa = PBXGroup;
 			children = (
 				AC6B399629549EC900440CB0 /* FlickApp.swift */,
-				AC6B399829549EC900440CB0 /* ContentView.swift */,
+				AC6B39A92954C39D00440CB0 /* Views */,
 				AC6B399A29549ECA00440CB0 /* Assets.xcassets */,
 				AC6B399C29549ECA00440CB0 /* Preview Content */,
+				AC6B39A82954C39300440CB0 /* Models */,
 			);
 			path = Flick;
 			sourceTree = "<group>";
@@ -65,6 +70,23 @@
 				AC6B399D29549ECA00440CB0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AC6B39A82954C39300440CB0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AC6B39A62954C38A00440CB0 /* Flick.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AC6B39A92954C39D00440CB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC6B399829549EC900440CB0 /* ContentView.swift */,
+				AC6B39A42954C37400440CB0 /* FlickRow.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +161,8 @@
 			files = (
 				AC6B399929549EC900440CB0 /* ContentView.swift in Sources */,
 				AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */,
+				AC6B39A52954C37400440CB0 /* FlickRow.swift in Sources */,
+				AC6B39A72954C38A00440CB0 /* Flick.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
