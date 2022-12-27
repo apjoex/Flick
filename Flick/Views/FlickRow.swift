@@ -12,17 +12,8 @@ struct FlickRow: View {
     
     var body: some View {
         HStack (spacing: 10) {
-            AsyncImage(url: URL(string: flick.poster)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                
-            } placeholder: {
-                Color.gray
-                    .opacity(0.6)
-            }
-            .frame(width: 70)
-            .cornerRadius(6.0)
+            FlickPoster(url: flick.poster)
+                .frame(width: 70)
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(flick.title)

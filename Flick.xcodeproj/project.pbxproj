@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC28F072295B62F300CFFBEB /* FlickDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F071295B62F300CFFBEB /* FlickDetailView.swift */; };
+		AC28F074295B64EC00CFFBEB /* FlickPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F073295B64EC00CFFBEB /* FlickPoster.swift */; };
 		AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399629549EC900440CB0 /* FlickApp.swift */; };
 		AC6B399929549EC900440CB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399829549EC900440CB0 /* ContentView.swift */; };
 		AC6B399B29549ECA00440CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC6B399A29549ECA00440CB0 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC28F071295B62F300CFFBEB /* FlickDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickDetailView.swift; sourceTree = "<group>"; };
+		AC28F073295B64EC00CFFBEB /* FlickPoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickPoster.swift; sourceTree = "<group>"; };
 		AC6B399329549EC900440CB0 /* Flick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B399629549EC900440CB0 /* FlickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickApp.swift; sourceTree = "<group>"; };
 		AC6B399829549EC900440CB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 			children = (
 				AC6B399829549EC900440CB0 /* ContentView.swift */,
 				AC6B39A42954C37400440CB0 /* FlickRow.swift */,
+				AC28F071295B62F300CFFBEB /* FlickDetailView.swift */,
+				AC28F073295B64EC00CFFBEB /* FlickPoster.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,9 +165,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC28F074295B64EC00CFFBEB /* FlickPoster.swift in Sources */,
 				AC6B399929549EC900440CB0 /* ContentView.swift in Sources */,
 				AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */,
 				AC6B39A52954C37400440CB0 /* FlickRow.swift in Sources */,
+				AC28F072295B62F300CFFBEB /* FlickDetailView.swift in Sources */,
 				AC6B39A72954C38A00440CB0 /* Flick.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

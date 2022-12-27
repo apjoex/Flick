@@ -82,18 +82,28 @@ struct ContentView: View {
                 Text("OMDb").tag(FlickScope.Omdb)
             }
             .onSubmit(of: .search) {
-                searchIMDB()
+                searchOMDB()
             }
         } detail: {
-            NavigationStack {
-                Text("Details gooes here for \(selectedFlick?.title ?? "")")
-                    .navigationTitle(selectedFlick?.title ?? "")
+            if let selectedFlick {
+                FlickDetailView(flick: selectedFlick)
+                    .navigationTitle(selectedFlick.title )
                     .navigationBarTitleDisplayMode(.inline)
+            } else {
+                VStack {
+                    FlickPoster(url: "")
+                        .frame(width: 200, height: 220)
+                    Text("Sample Flick")
+                        .font(.title3)
+                        .bold()
+                    Text("5.0")
+                }
+                .redacted(reason: .placeholder)
             }
         }
     }
     
-    func searchIMDB() {
+    func searchOMDB() {
         Task {
             var url = URL(string: "https://www.omdbapi.com/")!
             let requestParams = [
