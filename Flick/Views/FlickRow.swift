@@ -19,6 +19,7 @@ struct FlickRow: View {
                 
             } placeholder: {
                 Color.gray
+                    .opacity(0.6)
             }
             .frame(width: 70)
             .cornerRadius(6.0)
@@ -38,7 +39,7 @@ struct FlickRow: View {
                         .imageScale(.small)
                         .symbolRenderingMode(.multicolor)
                     
-                    Text(String(describing: flick.rating))
+                    Text(flick.rating)
                 }
             }
         }

@@ -8,15 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
+    enum FlickScope: String {
+        case favourites
+        case Omdb
+    }
+    
     @State private var selectedFlick: Flick?
     @State private var searchQuery: String = ""
+    @State private var searchScope = FlickScope.favourites
+    @State private var omdbFlicks = [Flick]()
+    
+    private var emptyViewTitle: String {
+        switch searchScope {
+        case .favourites:
+            return "No flicks to display"
+        case .Omdb:
+            return "No result"
+        }
+    }
+    
+    private var emptyViewSubtitle: String {
+        switch searchScope {
+        case .favourites:
+            return "Search for flicks on OMDb and add them to your favourites"
+        case .Omdb:
+            return "Try a different search term"
+        }
+    }
     
     private var flicks: [Flick] {
-        let allFlicks = Flick.sample
+        var allFlicks: [Flick]
+        switch searchScope {
+        case .favourites:
+            allFlicks = Flick.sample
+        case .Omdb:
+            allFlicks = omdbFlicks
+        }
+        
         if !searchQuery.isEmpty {
             return allFlicks.filter { flick in
-                flick.title.localizedCaseInsensitiveContains(searchQuery) ||
-                flick.plot.localizedCaseInsensitiveContains(searchQuery)
+                flick.title.localizedCaseInsensitiveContains(searchQuery)
             }
         } else {
             return allFlicks
@@ -28,30 +59,31 @@ struct ContentView: View {
             List(flicks, selection: $selectedFlick) { flick in
                 NavigationLink(value: flick) {
                     FlickRow(flick: flick)
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                //remove from favs
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                                    .labelStyle(IconOnlyLabelStyle())
-                            }
-                            
-                        }
                 }
             }
             .listStyle(.sidebar)
-            .navigationTitle("Flicks")
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        
-                    } label: {
-                        Label("Add flick", systemImage: "plus.circle.fill")
-                            .labelStyle(TitleAndIconLabelStyle())
+            .overlay(content: {
+                if flicks.isEmpty {
+                    VStack {
+                        Text(emptyViewTitle)
+                            .font(.title2)
+                            .bold()
+                        Text(emptyViewSubtitle)
+                            .frame(width: 300)
+                            .multilineTextAlignment(.center)
                     }
+                    .padding()
                 }
             })
-            .searchable(text: $searchQuery, prompt: "Search")
+            .navigationTitle("Flicks")
+            .searchable(text: $searchQuery, prompt: "Search favourites, OMDb")
+            .searchScopes($searchScope) {
+                Text("Your Favourites").tag(FlickScope.favourites)
+                Text("OMDb").tag(FlickScope.Omdb)
+            }
+            .onSubmit(of: .search) {
+                searchIMDB()
+            }
         } detail: {
             NavigationStack {
                 Text("Details gooes here for \(selectedFlick?.title ?? "")")
@@ -59,7 +91,28 @@ struct ContentView: View {
                     .navigationBarTitleDisplayMode(.inline)
             }
         }
-        
+    }
+    
+    func searchIMDB() {
+        Task {
+            var url = URL(string: "https://www.omdbapi.com/")!
+            let requestParams = [
+                URLQueryItem(name: "apikey", value: "d76fba06"),
+                URLQueryItem(name: "T", value: searchQuery)
+            ]
+            url.append(queryItems: requestParams)
+            let request = URLRequest(url: url)
+            do {
+                let (data, _) = try await URLSession.shared.data(for: request)
+                if let result = try? JSONDecoder().decode(Flick.self, from: data) {
+                    omdbFlicks = [result]
+                }
+                
+            } catch {
+                omdbFlicks = []
+                print("ERROR \(error)")
+            }
+        }
     }
 }
 
