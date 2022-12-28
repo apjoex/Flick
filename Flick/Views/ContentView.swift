@@ -10,65 +10,71 @@ import SwiftUI
 struct ContentView: View {
     enum FlickScope: String {
         case favourites
-        case Omdb
+        case omdb
+        
+        var titleMessage: String {
+            switch self {
+            case .favourites:
+                return "Search for flicks on OMDb and add them to your favourites"
+            case .omdb:
+                return "Try a different search term"
+            }
+        }
     }
     
     @State private var selectedFlick: Flick?
     @State private var searchQuery: String = ""
     @State private var searchScope = FlickScope.favourites
     @State private var omdbFlicks = [Flick]()
+    @State private var settingsShown: Bool = false
+    @State private var hiddenMovies: [String] = (UserDefaults.standard.array(forKey: "hiddenMovies") as? [String] ?? [])
     
-    private var emptyViewTitle: String {
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    private var filterdFlicks: [Flick] {
+        var flicks: [Flick]
         switch searchScope {
         case .favourites:
-            return "No flicks to display"
-        case .Omdb:
-            return "No result"
-        }
-    }
-    
-    private var emptyViewSubtitle: String {
-        switch searchScope {
-        case .favourites:
-            return "Search for flicks on OMDb and add them to your favourites"
-        case .Omdb:
-            return "Try a different search term"
-        }
-    }
-    
-    private var flicks: [Flick] {
-        var allFlicks: [Flick]
-        switch searchScope {
-        case .favourites:
-            allFlicks = Flick.sample
-        case .Omdb:
-            allFlicks = omdbFlicks
+            flicks = fetchedFlicks()
+        case .omdb:
+            flicks = omdbFlicks.filter{ omdbFlick in
+                !hiddenMovies.contains(omdbFlick.title)
+            }
         }
         
         if !searchQuery.isEmpty {
-            return allFlicks.filter { flick in
+            return flicks.filter { flick in
                 flick.title.localizedCaseInsensitiveContains(searchQuery)
             }
         } else {
-            return allFlicks
+            return flicks
         }
     }
     
     var body: some View {
         NavigationSplitView {
-            List(flicks, selection: $selectedFlick) { flick in
+            List(filterdFlicks, selection: $selectedFlick) { flick in
                 NavigationLink(value: flick) {
                     FlickRow(flick: flick)
+                        .contextMenu {
+                            if searchScope == .omdb {
+                                Button {
+                                    hiddenMovies.append(flick.title)
+                                } label: {
+                                    Label("Hide from results", systemImage: "eye.slash")
+                                }
+                            }
+                        }
                 }
             }
             .listStyle(.sidebar)
             .overlay(content: {
-                if flicks.isEmpty {
-                    VStack {
-                        Text(emptyViewTitle)
+                if filterdFlicks.isEmpty {
+                    VStack(spacing: 10) {
+                        Text("Nothing to display")
                             .font(.title2)
                             .bold()
-                        Text(emptyViewSubtitle)
+                        Text(searchScope.titleMessage)
                             .frame(width: 300)
                             .multilineTextAlignment(.center)
                     }
@@ -76,19 +82,34 @@ struct ContentView: View {
                 }
             })
             .navigationTitle("Flicks")
+            .toolbar(content: {
+                ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                    Button {
+                        settingsShown = true
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                            .labelStyle(.iconOnly)
+                    }
+                    
+                }
+            })
             .searchable(text: $searchQuery, prompt: "Search favourites, OMDb")
             .searchScopes($searchScope) {
                 Text("Your Favourites").tag(FlickScope.favourites)
-                Text("OMDb").tag(FlickScope.Omdb)
+                Text("OMDb").tag(FlickScope.omdb)
             }
             .onSubmit(of: .search) {
                 searchOMDB()
             }
+            .onChange(of: searchQuery) { _ in
+                searchOMDB()
+            }
+            .onChange(of: hiddenMovies) { newValue in
+                UserDefaults.standard.set(newValue, forKey: "hiddenMovies")
+            }
         } detail: {
             if let selectedFlick {
                 FlickDetailView(flick: selectedFlick)
-                    .navigationTitle(selectedFlick.title )
-                    .navigationBarTitleDisplayMode(.inline)
             } else {
                 VStack {
                     FlickPoster(url: "")
@@ -100,6 +121,35 @@ struct ContentView: View {
                 }
                 .redacted(reason: .placeholder)
             }
+        }
+        .sheet(isPresented: $settingsShown) {
+            List {
+                Section {
+                    ForEach(hiddenMovies, id: \.self) { title in
+                        Text(title)
+                            .swipeActions(edge: .trailing) {
+                                Button {
+                                    if let idx = hiddenMovies.firstIndex(of: title) {
+                                        hiddenMovies.remove(at: idx)
+                                    }
+                                } label: {
+                                    Label("Unhide", systemImage: "eye")
+                                        .labelStyle(.titleOnly)
+                                }
+                            }
+                    }
+                } header: {
+                    Text("Hidden movies")
+                        .padding(.top, 30)
+                } footer: {
+                    if !hiddenMovies.isEmpty {
+                        Text("Swipe left on a movie to unhide from search results")
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+            .navigationBarTitle("Settings", displayMode: .inline)
+            .presentationDetents([.medium, .large])
         }
     }
     
@@ -117,11 +167,18 @@ struct ContentView: View {
                 if let result = try? JSONDecoder().decode(Flick.self, from: data) {
                     omdbFlicks = [result]
                 }
-                
             } catch {
                 omdbFlicks = []
-                print("ERROR \(error)")
+                // Handle error better here
             }
+        }
+    }
+    
+    func fetchedFlicks() -> [Flick] {
+        let request = FlickEntity.fetchRequest()
+        let entities = (try? viewContext.fetch(request) as [FlickEntity]) ?? []
+        return entities.map { entity in
+            return Flick(entity: entity)
         }
     }
 }

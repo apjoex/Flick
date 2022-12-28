@@ -40,7 +40,6 @@ struct FlickRow: View {
 
 struct FlickRow_Previews: PreviewProvider {
     static var previews: some View {
-        let flick = Flick.sample.first!
-        FlickRow(flick: flick)
+        FlickRow(flick: Flick.sample)
     }
 }

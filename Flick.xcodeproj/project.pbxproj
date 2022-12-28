@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AC28F072295B62F300CFFBEB /* FlickDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F071295B62F300CFFBEB /* FlickDetailView.swift */; };
 		AC28F074295B64EC00CFFBEB /* FlickPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F073295B64EC00CFFBEB /* FlickPoster.swift */; };
+		AC28F077295B932500CFFBEB /* Flicks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC28F075295B932500CFFBEB /* Flicks.xcdatamodeld */; };
+		AC28F079295B93C700CFFBEB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F078295B93C700CFFBEB /* PersistenceController.swift */; };
 		AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399629549EC900440CB0 /* FlickApp.swift */; };
 		AC6B399929549EC900440CB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399829549EC900440CB0 /* ContentView.swift */; };
 		AC6B399B29549ECA00440CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC6B399A29549ECA00440CB0 /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		AC28F071295B62F300CFFBEB /* FlickDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickDetailView.swift; sourceTree = "<group>"; };
 		AC28F073295B64EC00CFFBEB /* FlickPoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickPoster.swift; sourceTree = "<group>"; };
+		AC28F076295B932500CFFBEB /* Flicks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Flicks.xcdatamodel; sourceTree = "<group>"; };
+		AC28F078295B93C700CFFBEB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		AC6B399329549EC900440CB0 /* Flick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B399629549EC900440CB0 /* FlickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickApp.swift; sourceTree = "<group>"; };
 		AC6B399829549EC900440CB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +44,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC3CAFBC295C878B004CAD84 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AC28F075295B932500CFFBEB /* Flicks.xcdatamodeld */,
+				AC28F078295B93C700CFFBEB /* PersistenceController.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		AC6B398A29549EC900440CB0 = {
 			isa = PBXGroup;
 			children = (
@@ -61,9 +74,10 @@
 			children = (
 				AC6B399629549EC900440CB0 /* FlickApp.swift */,
 				AC6B39A92954C39D00440CB0 /* Views */,
+				AC6B39A82954C39300440CB0 /* Models */,
+				AC3CAFBC295C878B004CAD84 /* Persistence */,
 				AC6B399A29549ECA00440CB0 /* Assets.xcassets */,
 				AC6B399C29549ECA00440CB0 /* Preview Content */,
-				AC6B39A82954C39300440CB0 /* Models */,
 			);
 			path = Flick;
 			sourceTree = "<group>";
@@ -170,7 +184,9 @@
 				AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */,
 				AC6B39A52954C37400440CB0 /* FlickRow.swift in Sources */,
 				AC28F072295B62F300CFFBEB /* FlickDetailView.swift in Sources */,
+				AC28F077295B932500CFFBEB /* Flicks.xcdatamodeld in Sources */,
 				AC6B39A72954C38A00440CB0 /* Flick.swift in Sources */,
+				AC28F079295B93C700CFFBEB /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +387,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AC28F075295B932500CFFBEB /* Flicks.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AC28F076295B932500CFFBEB /* Flicks.xcdatamodel */,
+			);
+			currentVersion = AC28F076295B932500CFFBEB /* Flicks.xcdatamodel */;
+			path = Flicks.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AC6B398B29549EC900440CB0 /* Project object */;
 }
