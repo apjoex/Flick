@@ -148,7 +148,6 @@ struct ContentView: View {
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationBarTitle("Settings", displayMode: .inline)
             .presentationDetents([.medium, .large])
         }
     }
