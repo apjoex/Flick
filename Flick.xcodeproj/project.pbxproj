@@ -11,6 +11,7 @@
 		AC28F074295B64EC00CFFBEB /* FlickPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F073295B64EC00CFFBEB /* FlickPoster.swift */; };
 		AC28F077295B932500CFFBEB /* Flicks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC28F075295B932500CFFBEB /* Flicks.xcdatamodeld */; };
 		AC28F079295B93C700CFFBEB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28F078295B93C700CFFBEB /* PersistenceController.swift */; };
+		AC53BC7D295D9EBB0006BC36 /* NetworkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53BC7C295D9EBB0006BC36 /* NetworkObserver.swift */; };
 		AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399629549EC900440CB0 /* FlickApp.swift */; };
 		AC6B399929549EC900440CB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B399829549EC900440CB0 /* ContentView.swift */; };
 		AC6B399B29549ECA00440CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC6B399A29549ECA00440CB0 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		AC28F073295B64EC00CFFBEB /* FlickPoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickPoster.swift; sourceTree = "<group>"; };
 		AC28F076295B932500CFFBEB /* Flicks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Flicks.xcdatamodel; sourceTree = "<group>"; };
 		AC28F078295B93C700CFFBEB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		AC53BC7C295D9EBB0006BC36 /* NetworkObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObserver.swift; sourceTree = "<group>"; };
 		AC6B399329549EC900440CB0 /* Flick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6B399629549EC900440CB0 /* FlickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickApp.swift; sourceTree = "<group>"; };
 		AC6B399829549EC900440CB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				AC3CAFBC295C878B004CAD84 /* Persistence */,
 				AC6B399A29549ECA00440CB0 /* Assets.xcassets */,
 				AC6B399C29549ECA00440CB0 /* Preview Content */,
+				AC53BC7C295D9EBB0006BC36 /* NetworkObserver.swift */,
 			);
 			path = Flick;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				AC6B399929549EC900440CB0 /* ContentView.swift in Sources */,
 				AC6B399729549EC900440CB0 /* FlickApp.swift in Sources */,
 				AC6B39A52954C37400440CB0 /* FlickRow.swift in Sources */,
+				AC53BC7D295D9EBB0006BC36 /* NetworkObserver.swift in Sources */,
 				AC28F072295B62F300CFFBEB /* FlickDetailView.swift in Sources */,
 				AC28F077295B932500CFFBEB /* Flicks.xcdatamodeld in Sources */,
 				AC6B39A72954C38A00440CB0 /* Flick.swift in Sources */,

@@ -29,6 +29,8 @@ struct ContentView: View {
     @State private var settingsShown: Bool = false
     @State private var hiddenMovies: [String] = (UserDefaults.standard.array(forKey: "hiddenMovies") as? [String] ?? [])
     
+    @StateObject private var networkObserver = NetworkObserver()
+    
     @Environment(\.managedObjectContext) private var viewContext
     
     private var filterdFlicks: [Flick] {
@@ -84,6 +86,10 @@ struct ContentView: View {
             .navigationTitle("Flicks")
             .toolbar(content: {
                 ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                    Label(networkObserver.isConnected ? "Online" : "Offline", systemImage: "antenna.radiowaves.left.and.right")
+                        .labelStyle(TitleAndIconLabelStyle())
+                        .foregroundColor(networkObserver.isConnected ? Color.green : Color.red)
+                    
                     Button {
                         settingsShown = true
                     } label: {
@@ -106,6 +112,9 @@ struct ContentView: View {
             }
             .onChange(of: hiddenMovies) { newValue in
                 UserDefaults.standard.set(newValue, forKey: "hiddenMovies")
+            }
+            .onAppear {
+                networkObserver.start()
             }
         } detail: {
             if let selectedFlick {
